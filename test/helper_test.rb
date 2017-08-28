@@ -120,5 +120,18 @@ class HelperTest < ActionView::TestCase
 
     assert_select "ul > li > a > img"
   end
-  
+
+  test "renders submenu as sibling when active" do
+    @menu_items = [:home]
+    concat(menu { |m|
+      concat m.home "Home", "/"
+      concat m.submenu {
+        concat tag(:img, nil, { :src => 'icon.jpg' })        
+      }
+      concat m.contact "Store", "/store"
+    })
+
+    assert_select "li.current", 1
+    assert_select "ul > img"
+  end
 end

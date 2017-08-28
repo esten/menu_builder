@@ -14,7 +14,7 @@ Dir["#{File.dirname(__FILE__)}/support/*.rb"].each { |f| require f }
 
 MenuBuilder::Routes = ActionDispatch::Routing::RouteSet.new
 MenuBuilder::Routes.draw do
-  match ':controller(/:action(/:id(.:format)))'
+  get ':controller(/:action(/:id(.:format)))'
 end
 
 class ApplicationController < ActionController::Base; end

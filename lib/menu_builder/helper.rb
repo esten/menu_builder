@@ -8,10 +8,11 @@ module MenuBuilder
     private
 
       class MenuItem
-        attr_reader :item, :args, :block
+        attr_reader :item, :args, :block, :submenu_block
+        attr_writer :submenu_block
 
-        def initialize(item, args, block)
-          @item, @args, @block = item, args, block
+        def initialize(item, args, block, submenu_block)
+          @item, @args, @block, @submenu_block = item, args, block, submenu_block
         end
 
         def link_to_in_context context
@@ -37,13 +38,21 @@ module MenuBuilder
           nil
         end
 
+        def submenu &block
+          @actual_items.last.submenu_block = block
+        end
+
         def render
           @block.call(self)
           @actual_items.map { |item| render_one item }.join.html_safe
         end
 
         def render_one item
-          @context.content_tag :li, item.link_to_in_context(@context), html_options_for(item)
+          html = ''
+          html << @context.content_tag(:li, item.link_to_in_context(@context), html_options_for(item))
+          if included_in_current_items? item
+            html << item.submenu_block.call(item)
+          end
         end
 
         def html_options_for item
