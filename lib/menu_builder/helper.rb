@@ -11,8 +11,8 @@ module MenuBuilder
         attr_reader :item, :args, :block, :submenu_block
         attr_writer :submenu_block
 
-        def initialize(item, args, block, submenu_block)
-          @item, @args, @block, @submenu_block = item, args, block, submenu_block
+        def initialize(item, args, block)
+          @item, @args, @block = item, args, block
         end
 
         def link_to_in_context context
