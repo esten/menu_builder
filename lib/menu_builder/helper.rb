@@ -53,6 +53,7 @@ module MenuBuilder
           if included_in_current_items?(item) && item.submenu_block
             html << item.submenu_block.call(item)
           end
+          html
         end
 
         def html_options_for item
