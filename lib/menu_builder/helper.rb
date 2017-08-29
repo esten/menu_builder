@@ -51,7 +51,7 @@ module MenuBuilder
           html = ''
           html << @context.content_tag(:li, item.link_to_in_context(@context), html_options_for(item))
           if included_in_current_items?(item) && item.submenu_block
-            html << item.submenu_block.call(item)
+            html << @context.content_tag(:div, item.submenu_block.call(item))
           end
           html
         end
