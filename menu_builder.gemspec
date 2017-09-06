@@ -20,5 +20,5 @@ Gem::Specification.new do |s|
   s.require_paths = ["lib"]
   s.add_dependency 'actionpack', '>3.0'
   s.add_dependency 'activemodel', '>3.0'
-  s.add_dependency 'test-unit', '>3.0'
+  s.add_development_dependency 'test-unit', '>3.0'
 end
